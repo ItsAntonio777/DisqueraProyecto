@@ -3,5 +3,5 @@ from .views import home, detail
 
 urlpatterns = [
     path('', home, name='home'),
-    path('album/<int:id>/', detail, name='post_detail'),
+    path('detail/<int:id>/', detail, name='detail'),
 ]
