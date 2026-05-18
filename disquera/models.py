@@ -20,13 +20,25 @@ class Post(models.Model):
        (DRAFT, 'Draft'),
    )
 
-   category = models.ForeignKey(Category, related_name='posts', on_delete=models.CASCADE)
+   category = models.ForeignKey(
+       Category,
+       related_name='posts',
+       on_delete=models.CASCADE
+   )
 
    title = models.CharField(max_length=255)
    slug = models.SlugField(max_length=255)
 
    intro = models.TextField()
    body = models.TextField()
+
+   price = models.DecimalField(
+       max_digits=8,
+       decimal_places=2,
+       default=0
+   )
+
+   stock = models.PositiveIntegerField(default=1)
 
    created_at = models.DateTimeField(auto_now_add=True)
 
@@ -36,7 +48,11 @@ class Post(models.Model):
        default=ACTIVE
    )
 
-   image = models.ImageField(upload_to='upload/', blank=True, null=True)
+   image = models.ImageField(
+       upload_to='upload/',
+       blank=True,
+       null=True
+   )
 
    def __str__(self):
        return self.title
@@ -47,7 +63,11 @@ class Post(models.Model):
 
 class Specification(models.Model):
 
-   post = models.ForeignKey(Post, related_name='specs', on_delete=models.CASCADE)
+   post = models.ForeignKey(
+       Post,
+       related_name='specs',
+       on_delete=models.CASCADE
+   )
 
    label = models.CharField(max_length=50)
    value = models.CharField(max_length=255)
@@ -58,7 +78,11 @@ class Specification(models.Model):
 
 class Comment(models.Model):
 
-   post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+   post = models.ForeignKey(
+       Post,
+       related_name='comments',
+       on_delete=models.CASCADE
+   )
 
    name = models.CharField(max_length=255)
 
