@@ -20,7 +20,7 @@ class Category(models.Model):
 
     color_hex = models.CharField(
         max_length=7,
-        default="#FFA51F"
+        default="#FFB03A"
     )
 
 
