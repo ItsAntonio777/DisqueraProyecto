@@ -130,3 +130,4 @@ def add_to_cart(request, id):
 
 
     return redirect('cart')
+
