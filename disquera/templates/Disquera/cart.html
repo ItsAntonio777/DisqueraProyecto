@@ -1,71 +1,147 @@
 {% extends 'disquera/base.html' %}
 
 {% block title %}
-    Mi Carrito |
+Mi Carrito |
 {% endblock %}
 
 {% block content %}
+
 <div class="container py-5">
-    <h2 class="mb-4 fw-bold">Carrito de Compras</h2>
+
+    <h2 class="mb-4 fw-bold">
+        Carrito de Compras
+    </h2>
 
     <div class="row">
+
         <div class="col-lg-8">
+
             {% if items %}
+
                 <div class="card shadow-sm border-0 mb-4">
+
                     <div class="table-responsive">
+
                         <table class="table table-hover align-middle mb-0">
+
                             <thead class="table-dark">
+
                                 <tr>
-                                    <th scope="col" class="ps-4">Álbum</th>
-                                    <th scope="col">Precio</th>
-                                    <th scope="col" class="text-center">Cantidad</th>
-                                    <th scope="col" class="pe-4 text-end">Subtotal</th>
+
+                                    <th class="ps-4">
+                                        Álbum
+                                    </th>
+
+                                    <th>
+                                        Precio
+                                    </th>
+
+                                    <th class="text-center">
+                                        Cantidad
+                                    </th>
+
+                                    <th class="pe-4 text-end">
+                                        Subtotal
+                                    </th>
+
                                 </tr>
+
                             </thead>
+
                             <tbody>
+
                                 {% for item in items %}
+
                                     <tr>
+
                                         <td class="ps-4 fw-bold">
                                             {{ item.post.title }}
                                         </td>
-                                        <td>${{ item.post.price }}</td>
-                                        <td class="text-center">
-                                            <span class="badge bg-secondary p-2">{{ item.quantity }}</span>
+
+                                        <td>
+                                            ${{ item.post.price }}
                                         </td>
+
+                                        <td class="text-center">
+                                            <span class="badge bg-secondary p-2">
+                                                {{ item.quantity }}
+                                            </span>
+                                        </td>
+
                                         <td class="pe-4 text-end fw-bold text-success">
                                             ${{ item.subtotal }}
                                         </td>
+
                                     </tr>
+
                                 {% endfor %}
+
                             </tbody>
+
                         </table>
+
                     </div>
+
                 </div>
+
             {% else %}
-                <div class="alert alert-info border-0 shadow-sm" role="alert">
-                    Tu carrito está vacío en este momento. <a href="{% url 'home' %}" class="alert-link">Volver a la tienda</a>.
+
+                <div class="alert alert-info border-0 shadow-sm">
+
+                    Tu carrito está vacío.
+
                 </div>
+
             {% endif %}
+
         </div>
 
         <div class="col-lg-4">
+
             <div class="card shadow-sm border-0">
+
                 <div class="card-body">
-                    <h4 class="mb-4 fw-bold">Resumen</h4>
+
+                    <h4 class="mb-4 fw-bold">
+                        Resumen
+                    </h4>
+
                     <div class="d-flex justify-content-between mb-3">
-                        <span class="text-muted">Total a pagar:</span>
-                        <h3 class="text-success fw-bold">${{ total }}</h3>
+
+                        <span class="text-muted">
+                            Total a pagar:
+                        </span>
+
+                        <h3 class="text-success fw-bold">
+                            ${{ total }}
+                        </h3>
+
                     </div>
+
                     <hr>
-                    <button class="btn btn-success w-100 btn-lg mb-2">
+
+                    <a href="{% url 'checkout' %}"
+                       class="btn btn-success w-100 btn-lg mb-2">
+
                         Proceder al pago
-                    </button>
-                    <a href="{% url 'home' %}" class="btn btn-outline-dark w-100">
-                        Seguir comprando
+
                     </a>
+
+                    <a href="{% url 'home' %}"
+                       class="btn btn-outline-dark w-100">
+
+                        Seguir comprando
+
+                    </a>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
+
 {% endblock %}
