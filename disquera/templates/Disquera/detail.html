@@ -8,54 +8,97 @@
 
 <div class="container py-5">
 
-    <div class="row">
+    <div class="row g-5">
 
-        <div class="col-lg-6 mb-4">
+        <!-- IMAGEN -->
+        <div class="col-lg-6">
 
             {% if post.image %}
 
                 <img src="{{ post.image.url }}"
-                     class="img-fluid rounded shadow-sm w-100"
+                     class="img-fluid rounded-4 shadow w-100"
                      alt="{{ post.title }}">
 
             {% endif %}
 
         </div>
 
+        <!-- INFORMACIÓN -->
         <div class="col-lg-6">
 
-            <span class="badge bg-primary mb-3">
+            <!-- CATEGORÍA -->
+            <span class="badge bg-primary mb-3 p-2">
+
                 {{ post.category.title }}
+
             </span>
 
+            <!-- TÍTULO -->
             <h1 class="fw-bold mb-3">
+
                 {{ post.title }}
+
             </h1>
 
-            <p class="text-muted">
+            <!-- INTRO -->
+            <p class="lead text-muted">
+
                 {{ post.intro }}
+
             </p>
 
             <hr>
 
-            <p>
+            <!-- DESCRIPCIÓN -->
+            <p class="fs-5">
+
                 {{ post.body }}
+
             </p>
 
-            <h3 class="text-success fw-bold mt-4">
+            <!-- CANCIONES -->
+            {% if post.songs %}
+
+                <div class="mt-5">
+
+                    <h4 class="fw-bold mb-3">
+
+                        🎵 Canciones del álbum
+
+                    </h4>
+
+                    <div class="bg-light border rounded-4 p-4 shadow-sm">
+
+                        {{ post.songs|linebreaks }}
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+            <!-- PRECIO -->
+            <h2 class="text-success fw-bold mt-5">
+
                 ${{ post.price }}
-            </h3>
 
+            </h2>
+
+            <!-- STOCK -->
             <p class="text-muted">
-                Stock disponible: {{ post.stock }}
+
+                Stock disponible:
+                <strong>{{ post.stock }}</strong>
+
             </p>
 
-            <div class="mt-4">
+            <!-- BOTONES -->
+            <div class="mt-4 d-flex gap-3">
 
                 <a href="{% url 'add_to_cart' post.id %}"
-                   class="btn btn-success btn-lg me-2">
+                   class="btn btn-success btn-lg">
 
-                    Comprar álbum
+                    🛒 Comprar álbum
 
                 </a>
 
@@ -75,4 +118,3 @@
 </div>
 
 {% endblock %}
-
