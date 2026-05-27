@@ -1,41 +1,46 @@
 from django.urls import path
-
+from django.contrib.auth import views as auth_views
 
 from .views import (
     home,
     detail,
     cart,
-    add_to_cart
+    add_to_cart,
+    register,
+    checkout,
+    success,
+    my_orders
 )
-
 
 urlpatterns = [
 
+    path('', home, name='home'),
+
+    path('detail/<int:id>/', detail, name='detail'),
+
+    path('cart/', cart, name='cart'),
+
+    path('add-to-cart/<int:id>/', add_to_cart, name='add_to_cart'),
+
+    path('register/', register, name='register'),
 
     path(
-        '',
-        home,
-        name='home'
+        'login/',
+        auth_views.LoginView.as_view(
+            template_name='disquera/login.html'
+        ),
+        name='login'
     ),
-
 
     path(
-        'detail/<int:id>/',
-        detail,
-        name='detail'
+        'logout/',
+        auth_views.LogoutView.as_view(),
+        name='logout'
     ),
 
+    path('checkout/', checkout, name='checkout'),
 
-    path(
-        'cart/',
-        cart,
-        name='cart'
-    ),
+    path('success/', success, name='success'),
 
-
-    path(
-        'add-to-cart/<int:id>/',
-        add_to_cart,
-        name='add_to_cart'
-    ),
+    path('my-orders/', my_orders, name='my_orders'),
 ]
