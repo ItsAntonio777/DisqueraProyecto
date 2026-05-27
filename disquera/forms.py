@@ -18,6 +18,37 @@ class RegisterForm(UserCreationForm):
 
 
 class CheckoutForm(forms.ModelForm):
+
     class Meta:
         model = Order
-        fields = ['full_name', 'address', 'city', 'postal_code']
+
+        fields = [
+            'full_name',
+            'address',
+            'city',
+            'postal_code'
+        ]
+
+        widgets = {
+
+            'full_name': forms.TextInput(attrs={
+                'class': 'form-control form-control-lg',
+                'placeholder': 'Tu nombre completo'
+            }),
+
+            'address': forms.Textarea(attrs={
+                'class': 'form-control form-control-lg',
+                'placeholder': 'Tu dirección',
+                'rows': 4
+            }),
+
+            'city': forms.TextInput(attrs={
+                'class': 'form-control form-control-lg',
+                'placeholder': 'Tu ciudad'
+            }),
+
+            'postal_code': forms.TextInput(attrs={
+                'class': 'form-control form-control-lg',
+                'placeholder': 'Código postal'
+            }),
+        }

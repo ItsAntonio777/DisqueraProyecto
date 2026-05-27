@@ -9,10 +9,16 @@ from .views import (
     register,
     checkout,
     success,
-    my_orders
+    my_orders,
+    category_detail
 )
 
 urlpatterns = [
+    path(
+    'category/<slug:slug>/',
+    category_detail,
+    name='category_detail'
+),
 
     path('', home, name='home'),
 
