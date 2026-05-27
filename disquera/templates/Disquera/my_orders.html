@@ -1,0 +1,97 @@
+{% extends 'disquera/base.html' %}
+
+{% block title %}
+Mis pedidos |
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="display-4 fw-bold">
+            📦 Mis Pedidos
+        </h1>
+
+        <p class="lead text-muted">
+            Historial de compras realizadas
+        </p>
+
+    </div>
+
+    {% if orders %}
+
+        <div class="row g-4">
+
+            {% for order in orders %}
+
+                <div class="col-lg-6">
+
+                    <div class="card shadow border-0 h-100">
+
+                        <div class="card-body">
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                <h4 class="fw-bold mb-0">
+                                    Orden #{{ order.id }}
+                                </h4>
+
+                                <span class="badge bg-success">
+                                    {{ order.status }}
+                                </span>
+
+                            </div>
+
+                            <hr>
+
+                            <p>
+                                <strong>Cliente:</strong>
+                                {{ order.full_name }}
+                            </p>
+
+                            <p>
+                                <strong>Ciudad:</strong>
+                                {{ order.city }}
+                            </p>
+
+                            <p>
+                                <strong>Código postal:</strong>
+                                {{ order.postal_code }}
+                            </p>
+
+                            <p>
+                                <strong>Fecha:</strong>
+                                {{ order.created_at }}
+                            </p>
+
+                            <hr>
+
+                            <h5 class="fw-bold text-success">
+                                Total: ${{ order.total }}
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info shadow-sm border-0 text-center">
+
+            Aún no has realizado compras.
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
