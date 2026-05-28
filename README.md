@@ -1,3 +1,24 @@
+PROYECTO DISQUERA
+
+Implementa Base de Datos Relacionales
+
+Integrantes:
+Martinez Jimenez Kevin Andres
+Gonzalez Hernandez Luis Antonio
+Barajas Bañuelos Jesus Axel
+Mexta Torres Genesis
+Gutierrez Ruiz Jesus Javier
+Garcia Hernandez Joshua Alexander
+Profesor :Jose Christian Romero Sanchez
+
+Grupo: 4AVPG
+
+Fecha de entrega
+
+28 de mayo del 2026
+
+
+
 Introducción 
 1. Descripción General del Proyecto
 “Disquera” es una aplicación web desarrollada con Django utilizando Python y el patrón de arquitectura MVT (Modelo-Vista-Template). El objetivo principal del proyecto es simular el funcionamiento de una tienda discográfica digital, donde los usuarios pueden explorar álbumes musicales, filtrarlos por categorías y realizar compras desde una plataforma web moderna e interactiva.
