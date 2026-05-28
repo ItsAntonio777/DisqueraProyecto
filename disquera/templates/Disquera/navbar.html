@@ -102,7 +102,29 @@
     </div>
 
 </nav>
-<form class="d-flex" method="GET" action="{% url 'search' %}">
-  <input class="form-control me-2" type="search" name="q" placeholder="Buscar álbum...">
-  <button class="btn btn-outline-light">Buscar</button>
+<form class="d-flex gap-2" method="GET" action="{% url 'search' %}">
+
+    <input
+        class="form-control"
+        type="search"
+        name="q"
+        placeholder="Buscar..."
+    >
+
+    <select class="form-select" name="type">
+
+        <option value="album">
+            Álbum
+        </option>
+
+        <option value="artist">
+            Artista
+        </option>
+
+    </select>
+
+    <button class="btn btn-outline-light">
+        Buscar
+    </button>
+
 </form>

@@ -202,11 +202,24 @@ def profile(request):
 
 # SEARCH (ARREGLADO)
 def search(request):
-    query = request.GET.get('q')
 
-    results = Post.objects.filter(title__icontains=query)
+    query = request.GET.get('q')
+    search_type = request.GET.get('type')
+
+    if search_type == 'artist':
+
+        results = Post.objects.filter(
+            artist__stage_name__icontains=query
+        )
+
+    else:
+
+        results = Post.objects.filter(
+            title__icontains=query
+        )
 
     return render(request, 'disquera/search.html', {
         'results': results,
-        'query': query
+        'query': query,
+        'search_type': search_type
     })
