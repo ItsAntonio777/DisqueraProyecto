@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+
 
 from .models import (
     Post,
@@ -9,7 +11,8 @@ from .models import (
     Order,
     OrderItem,
     Category,
-    CartItem
+    CartItem,
+    
 )
 
 from .forms import (
@@ -17,6 +20,18 @@ from .forms import (
     CheckoutForm,
     RegisterForm
 )
+@login_required
+def eliminar_del_carrito(request, post_id):
+
+    item = get_object_or_404(
+        CartItem,
+        user=request.user,
+        post_id=post_id
+    )
+
+    item.delete()
+
+    return redirect('cart')
 
 # HOME
 def home(request):

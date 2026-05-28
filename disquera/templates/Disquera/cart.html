@@ -26,6 +26,7 @@
                                 <th>Precio</th>
                                 <th class="text-center">Cantidad</th>
                                 <th class="text-end">Subtotal</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
 
@@ -68,6 +69,18 @@
                                 <!-- SUBTOTAL -->
                                 <td class="text-end fw-bold text-success">
                                     ${{ item.subtotal }}
+                                </td>
+
+                                <!-- ELIMINAR -->
+                                <td class="text-center">
+
+                                    <a href="{% url 'eliminar_del_carrito' item.post.id %}"
+                                       class="btn btn-danger btn-sm">
+
+                                        ❌ Eliminar
+
+                                    </a>
+
                                 </td>
 
                             </tr>
