@@ -8,7 +8,8 @@ from .models import (
     Profile,
     Order,
     OrderItem,
-    Category
+    Category,
+    CartItem
 )
 
 from .forms import (
@@ -17,14 +18,9 @@ from .forms import (
     RegisterForm
 )
 
-
-# ✅ HOME
+# HOME
 def home(request):
-
-    posts = Post.objects.filter(
-        status=Post.ACTIVE
-    ).order_by('-created_at')
-
+    posts = Post.objects.filter(status=Post.ACTIVE).order_by('-created_at')
     categories = Category.objects.all()
 
     return render(request, 'disquera/home.html', {
@@ -33,18 +29,11 @@ def home(request):
     })
 
 
-# ✅ CATEGORÍAS
+# CATEGORY
 def category_detail(request, slug):
+    category = get_object_or_404(Category, slug=slug)
 
-    category = get_object_or_404(
-        Category,
-        slug=slug
-    )
-
-    posts = Post.objects.filter(
-        category=category,
-        status=Post.ACTIVE
-    )
+    posts = Post.objects.filter(category=category, status=Post.ACTIVE)
 
     return render(request, 'disquera/category_detail.html', {
         'category': category,
@@ -52,16 +41,11 @@ def category_detail(request, slug):
     })
 
 
-# ✅ DETAIL
+# DETAIL
 def detail(request, id):
-
-    post = get_object_or_404(
-        Post,
-        id=id
-    )
+    post = get_object_or_404(Post, id=id)
 
     form = CommentForm()
-
     comments = post.comments.all().order_by('-created_at')
 
     return render(request, 'disquera/detail.html', {
@@ -70,19 +54,32 @@ def detail(request, id):
         'comments': comments
     })
 
+@login_required
+def update_cart_quantity(request, id, action):
 
-# ✅ CARRITO
+    item = get_object_or_404(CartItem, id=id, user=request.user)
+
+    if action == 'add':
+        item.quantity += 1
+
+    elif action == 'remove':
+        item.quantity -= 1
+
+        if item.quantity <= 0:
+            item.delete()
+            return redirect('cart')
+
+    item.save()
+
+    return redirect('cart')
+
+
+# CART
 @login_required
 def cart(request):
+    items = CartItem.objects.filter(user=request.user)
 
-    items = CartItem.objects.filter(
-        user=request.user
-    )
-
-    total = sum(
-        item.subtotal()
-        for item in items
-    )
+    total = sum(item.subtotal() for item in items)
 
     return render(request, 'disquera/cart.html', {
         'items': items,
@@ -90,14 +87,10 @@ def cart(request):
     })
 
 
-# ✅ AGREGAR AL CARRITO
+# ADD TO CART
 @login_required
 def add_to_cart(request, id):
-
-    post = get_object_or_404(
-        Post,
-        id=id
-    )
+    post = get_object_or_404(Post, id=id)
 
     item, created = CartItem.objects.get_or_create(
         user=request.user,
@@ -105,53 +98,37 @@ def add_to_cart(request, id):
     )
 
     if not created:
-
         item.quantity += 1
         item.save()
 
     return redirect('cart')
 
 
-# ✅ REGISTRO
+# REGISTER
 def register(request):
-
     if request.method == 'POST':
-
         form = RegisterForm(request.POST)
 
         if form.is_valid():
-
             user = form.save()
 
-            Profile.objects.create(
-                user=user
-            )
+            Profile.objects.create(user=user)
 
             login(request, user)
 
             return redirect('home')
 
     else:
-
         form = RegisterForm()
 
-    return render(request, 'disquera/register.html', {
-        'form': form
-    })
+    return render(request, 'disquera/register.html', {'form': form})
 
-
-# ✅ CHECKOUT
 @login_required
 def checkout(request):
 
-    items = CartItem.objects.filter(
-        user=request.user
-    )
+    items = CartItem.objects.filter(user=request.user)
 
-    total = sum(
-        item.subtotal()
-        for item in items
-    )
+    total = sum(item.subtotal() for item in items)
 
     if request.method == 'POST':
 
@@ -160,54 +137,76 @@ def checkout(request):
         if form.is_valid():
 
             order = form.save(commit=False)
-
             order.user = request.user
             order.total = total
             order.status = Order.PAID
-
             order.save()
 
+            # 🔥 AQUÍ SE DESCUENTA STOCK Y SE CREA ORDEN
             for item in items:
+
+                post = item.post
+
+                # 🚨 validar stock
+                if post.stock < item.quantity:
+                    return redirect('cart')
+
+                post.stock -= item.quantity
+                post.save()
 
                 OrderItem.objects.create(
                     order=order,
-                    post=item.post,
+                    post=post,
                     quantity=item.quantity,
-                    price=item.post.price
+                    price=post.price
                 )
 
+            # limpiar carrito
             items.delete()
 
             return redirect('success')
 
     else:
-
         form = CheckoutForm()
 
     return render(request, 'disquera/checkout.html', {
+        'form': form,
         'items': items,
-        'total': total,
-        'form': form
+        'total': total
     })
 
-
-# ✅ SUCCESS
+# SUCCESS
 def success(request):
-
-    return render(
-        request,
-        'disquera/success.html'
-    )
+    return render(request, 'disquera/success.html')
 
 
-# ✅ PEDIDOS
+# ORDERS
 @login_required
 def my_orders(request):
-
-    orders = Order.objects.filter(
-        user=request.user
-    ).order_by('-created_at')
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
 
     return render(request, 'disquera/my_orders.html', {
         'orders': orders
+    })
+
+
+# PROFILE
+@login_required
+def profile(request):
+    profile = Profile.objects.get(user=request.user)
+
+    return render(request, 'disquera/profile.html', {
+        'profile': profile
+    })
+
+
+# SEARCH (ARREGLADO)
+def search(request):
+    query = request.GET.get('q')
+
+    results = Post.objects.filter(title__icontains=query)
+
+    return render(request, 'disquera/search.html', {
+        'results': results,
+        'query': query
     })

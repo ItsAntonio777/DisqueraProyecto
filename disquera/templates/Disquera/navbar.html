@@ -102,3 +102,7 @@
     </div>
 
 </nav>
+<form class="d-flex" method="GET" action="{% url 'search' %}">
+  <input class="form-control me-2" type="search" name="q" placeholder="Buscar álbum...">
+  <button class="btn btn-outline-light">Buscar</button>
+</form>

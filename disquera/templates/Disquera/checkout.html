@@ -34,53 +34,30 @@ Checkout |
                     </h3>
 
                     <form method="POST">
-
                         {% csrf_token %}
 
                         <div class="mb-4">
-
-                            <label class="form-label fw-bold">
-                                Nombre completo
-                            </label>
-
+                            <label class="form-label fw-bold">Nombre completo</label>
                             {{ form.full_name }}
-
                         </div>
 
                         <div class="mb-4">
-
-                            <label class="form-label fw-bold">
-                                Dirección
-                            </label>
-
+                            <label class="form-label fw-bold">Dirección</label>
                             {{ form.address }}
-
                         </div>
 
                         <div class="mb-4">
-
-                            <label class="form-label fw-bold">
-                                Ciudad
-                            </label>
-
+                            <label class="form-label fw-bold">Ciudad</label>
                             {{ form.city }}
-
                         </div>
 
                         <div class="mb-4">
-
-                            <label class="form-label fw-bold">
-                                Código postal
-                            </label>
-
+                            <label class="form-label fw-bold">Código postal</label>
                             {{ form.postal_code }}
-
                         </div>
 
-                        <button class="btn btn-success btn-lg w-100 rounded-3">
-
+                        <button type="submit" class="btn btn-success btn-lg w-100 rounded-3">
                             🛍️ Confirmar compra
-
                         </button>
 
                     </form>
@@ -107,7 +84,6 @@ Checkout |
                         <div class="d-flex justify-content-between mb-3">
 
                             <div>
-
                                 <h6 class="fw-bold mb-0">
                                     {{ item.post.title }}
                                 </h6>
@@ -115,7 +91,6 @@ Checkout |
                                 <small class="text-muted">
                                     Cantidad: {{ item.quantity }}
                                 </small>
-
                             </div>
 
                             <span class="fw-bold">
@@ -130,9 +105,7 @@ Checkout |
 
                     <div class="d-flex justify-content-between align-items-center">
 
-                        <h3 class="fw-bold">
-                            Total
-                        </h3>
+                        <h3 class="fw-bold">Total</h3>
 
                         <h2 class="text-success fw-bold">
                             ${{ total }}
