@@ -17,7 +17,7 @@ class Profile(models.Model):
         return self.user.username
 
 
-# 🏷️ CATEGORY (ESTABA FALTANDO → ESTE ERA TU ERROR)
+# 🏷️ CATEGORY
 class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
@@ -55,10 +55,11 @@ class Post(models.Model):
         blank=True
     )
 
-    category = models.ForeignKey(
+    # 🔥 CAMBIO AQUÍ: Ahora es ManyToManyField y en plural
+    categories = models.ManyToManyField(
         Category,
         related_name='posts',
-        on_delete=models.CASCADE
+        blank=True
     )
 
     title = models.CharField(max_length=255)
@@ -72,9 +73,7 @@ class Post(models.Model):
     stock = models.PositiveIntegerField(default=1)
 
     created_at = models.DateTimeField(auto_now_add=True)
-
     status = models.CharField(max_length=10, choices=CHOICES_STATUS, default=ACTIVE)
-
     image = models.ImageField(upload_to='upload/', blank=True, null=True)
 
     def __str__(self):
