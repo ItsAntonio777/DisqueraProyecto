@@ -9,7 +9,7 @@ Barajas Bañuelos Jesus Axel
 Mexta Torres Genesis
 Gutierrez Ruiz Jesus Javier
 Garcia Hernandez Joshua Alexander
-Profesor :Jose Christian Romero Sanchez
+Profesor :Jose Christian Romero Hernandez
 
 Grupo: 4AVPG
 
