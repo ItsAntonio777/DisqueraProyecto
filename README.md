@@ -17,88 +17,99 @@ Fecha de entrega
 
 28 de mayo del 2026
 
-
-
-
-         ÍNDICE:
-              portada	1
-              Introducción	4
-      1. Descripción General del Proyecto	4
-      2. Arquitectura de Datos y Evolución del Backend (Modelos)	5
-Gestión de Catálogo (Category y Post)	5
-Sistema Comercial e Inventario	5
+Introducción	4
+1. Descripción General del Proyecto	4
+2. Arquitectura de Datos y Evolución del Backend (Modelos)	4
+Gestión de Catálogo (Category y Post)	4
+Sistema Comercial e Inventario	4
 Gestión de Usuarios y Artistas	6
 Sistema de Compras (CartItem y Order)	6
-               3. Diseño de la Interfaz y Experiencia de Usuario (Frontend)	6
-Plantilla Base (base.html)	6
-Página Principal (home.html)	6
+3. Diseño de la Interfaz y Experiencia de Usuario (Frontend)	7
+Plantilla Base (base.html)	7
+Página Principal (home.html)	7
 Vistas de Detalle y Categorías	7
-Checkout y Proceso de Compra	7
-               1. Explicación Detallada de settings.py (La Configuración del Sistema)	8
-Carpeta DisqueraProyecto	8
-A. Rutas del Sistema y Seguridad	8
-B. Módulos y Extensiones	8
-● MIDDLEWARE:	8
-C. Base de Datos y Multimedia	8
-● DATABASES:	8
-       2. Explicación Detallada de urls.py (El Enrutador Global)	9
-Función de cada ruta	9
-                ● path('admin/', admin.site.urls):	9
-                 ● path('', include('disquera.urls')):	9
-Bloque Condicional para Archivos Multimedia	9
-        3. Explicación Detallada de views.py de la Raíz	9
-         Diseño de la Base de Datos y Relaciones	10
-Modelo Category	10
-Campos principales	10
-Relación	10
-Modelo Artist	11
+Checkout y Proceso de Compra	8
+1. Explicación Detallada de settings.py (La Configuración del Sistema)	9
+Carpeta DisqueraProyecto	9
+A. Rutas del Sistema y Seguridad	9
+B. Módulos y Extensiones	9
+● MIDDLEWARE:	9
+C. Base de Datos y Multimedia	9
+● DATABASES:	9
+2. Explicación Detallada de urls.py (El Enrutador Global)	10
+Función de cada ruta	10
+● path('admin/', admin.site.urls):	10
+● path('', include('disquera.urls')):	10
+Bloque Condicional para Archivos Multimedia	10
+3. Explicación Detallada de views.py de la Raíz	10
+Diseño de la Base de Datos y Relaciones	11
+Modelo Category	11
 Campos principales	11
 Relación	11
-Modelo Post	11
-Campos principales	11
-Relaciones	11
-Modelo Specification	11
-Relación	11
-Modelo Comment	12
-Campos	12
+Modelo Artist	12
+Campos principales	12
 Relación	12
-Modelo CartItem	12
-Relaciones	12
-Modelo Profile	12
-Campos	12
-Relación	12
-Modelo Order	13
-Campos	13
-Estados posibles	13
-Relación	13
-Modelo OrderItem	13
-Campos	13
-Diagrama Relacional	13
-       1. Explicación Detallada de los Modelos (models.py)	14
-Carpeta disquera	14
-A. Catálogo Musical y Contenido	14
-B. Comunidad y Feedback	14
-C. Sistema de Carrito y Perfiles	14
-D. Sistema de Órdenes (Historial de Compras)	14
-               2. Explicación Detallada de las Vistas (views.py)	14
-              3. Explicación Detallada de las URLs (urls.py)	15
-Gestión de Datos Mediante el Panel de Administración	15
-Entrada de Datos (Create)	15
-Visualización de Datos (Read)	16
-Actualización de Datos (Update)	16
-Eliminación de Datos (Delete)	16
-Ventajas del Sistema Admin de Django	17
-                Finalmente: Explicación de los Views y su interacción con URLs y Templates	17
-                Relación entre URLs, Views y Templates URLs	17
-                Views	17
-                 Templates	18
-                 Explicación de cada View	18
-                  View detail	19
-                  View register	21
-                  View checkout	21
-                  View success	22
-                  Navbar y navegación	23
-                               conclusión	23
+Modelo Post	12
+Modelo Category	13
+Modelo Artist	14
+Modelo Post	14
+Modelo Specification	16
+Modelo Comment	16
+Modelo Order	17
+Campos principales	19
+Relaciones	19
+Modelo Specification	19
+Relación	20
+Modelo Comment	20
+Campos	20
+Relación	20
+Modelo CartItem	20
+Relaciones	20
+Modelo Profile	20
+Campos	20
+Relación	21
+Modelo Order	21
+Campos	21
+Estados posibles	21
+Relación	21
+Modelo OrderItem	21
+Campos	22
+Diagrama de flujo	23
+1. Explicación Detallada de los Modelos (models.py)	25
+Carpeta disquera	25
+A. Catálogo Musical y Contenido	25
+B. Comunidad y Feedback	25
+C. Sistema de Carrito y Perfiles	25
+D. Sistema de Órdenes (Historial de Compras)	25
+2. Explicación Detallada de las Vistas (views.py)	25
+3. Explicación Detallada de las URLs (urls.py)	26
+Gestión de Datos Mediante el Panel de Administración	26
+Entrada de Datos (Create)	26
+Visualización de Datos (Read)	27
+Actualización de Datos (Update)	27
+Eliminación de Datos (Delete)	27
+Ventajas del Sistema Admin de Django	28
+Finalmente: Explicación de los Views y su interacción con URLs y Templates	28
+Relación entre URLs, Views y Templates URLs	28
+Views	28
+Templates	29
+Explicación de cada View	29
+View detail	30
+View register	32
+View checkout	32
+View success	33
+Navbar y navegación	34
+Conclusión:	34
+¿Por qué funciona bien esta expansión?	34
+
+	
+
+
+
+
+
+
+
 
 
 
@@ -137,12 +148,15 @@ fecha de creación
 Gracias a esta estructura es posible mostrar los álbumes dinámicamente dentro de la aplicación.
 
 
+
+
+
+
 Sistema Comercial e Inventario
 
 Conforme avanzó el desarrollo del proyecto, se agregaron funciones relacionadas con ventas e inventario.
 
-Para los precios se utilizó DecimalField, ya que permite manejar cantidades monetarias con mayor precisión. También se implementó PositiveIntegerField para el control del stock, evitando cantidades negativas y ayudando a mantener un mejor control de los productos disponibles.
-
+Para los precios se utilizó DecimalField, ya que permite manejar cantidades monetarias con mayor precisión. También se implementó PositiveIntegerField para el control del stock, evitando cantidades negativas y ayudando a mantener un mejor control de los productos disponibles
 
 el archivo admin.py de la aplicación disquera dentro de Django. Este archivo sirve para registrar los modelos en el panel de administración de Django, permitiendo que el administrador pueda agregar, visualizar, modificar y eliminar información desde la interfaz de admin.
 Primero se importa el módulo de administración de Django:
@@ -226,6 +240,13 @@ botones de navegación,
 acceso rápido al carrito.
 
 Los productos se presentan mediante cards de Bootstrap para lograr una interfaz más limpia y visualmente agradable.
+
+
+
+
+
+
+
 
 
 Vistas de Detalle y Categorías
@@ -344,9 +365,16 @@ Después el comentario se relaciona con el álbum correspondiente y finalmente s
 
 Diseño de la Base de Datos y Relaciones
 
+
 La base de datos del proyecto “Disquera” fue desarrollada utilizando el ORM de Django, permitiendo manejar la información mediante modelos relacionados entre sí.
 
 La estructura relacional facilita la organización de usuarios, álbumes, artistas, pedidos y comentarios dentro de la plataforma.
+
+
+
+
+
+
 
 
 Modelo Category
@@ -431,6 +459,33 @@ def __str__(self):
     return self.title
 permite que Django muestre el nombre de la categoría dentro del panel de administración en lugar de mostrar objetos genéricos.
 
+from django.db import models
+from django.contrib.auth.models import User
+
+
+# PROFILE
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profiles/', blank=True, null=True)
+    bio = models.TextField(blank=True)
+
+    phone = models.CharField(max_length=20, blank=True)
+    address = models.TextField(blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    postal_code = models.CharField(max_length=20, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+
+#  CATEGORY
+class Category(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
+    color_hex = models.CharField(max_length=7, default="#FFB03A")
+
+    def __str__(self):
+        return self.title
 
 
 Modelo Artist
@@ -484,6 +539,33 @@ Gracias a esto la aplicación puede filtrar productos por categorías como Rock,
 El modelo Post funciona como el núcleo principal de la tienda ya que conecta artistas, categorías, imágenes, precios y publicaciones dentro del sistema.
 
 
+#  ARTIST
+class Artist(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    stage_name = models.CharField(max_length=255)
+    bio = models.TextField()
+
+    def __str__(self):
+        return self.stage_name
+
+
+# POST (ÁLBUM / PRODUCTO)
+class Post(models.Model):
+    ACTIVE = 'active'
+    DRAFT = 'draft'
+
+    CHOICES_STATUS = (
+        (ACTIVE, 'Active'),
+        (DRAFT, 'Draft'),
+    )
+
+    artist = models.ForeignKey(
+        Artist,
+        related_name='posts',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
 Dentro del modelo Post se encuentran varios campos encargados de almacenar toda la información relacionada con los álbumes musicales de la tienda.
 El campo:
 title = models.CharField(max_length=255)
@@ -558,6 +640,31 @@ created_at = models.DateTimeField(auto_now_add=True)
 permite guardar automáticamente la fecha y hora del comentario sin necesidad de ingresarla manualmente.
 Gracias a este modelo la aplicación puede mostrar comentarios dinámicamente dentro de la vista detallada de cada álbum.
 
+   # ManyToManyField
+    categories = models.ManyToManyField(
+        Category,
+        related_name='posts',
+        blank=True
+    )
+
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
+    intro = models.TextField()
+    body = models.TextField()
+
+    songs = models.TextField(blank=True, null=True)
+
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    stock = models.PositiveIntegerField(default=1)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=CHOICES_STATUS, default=ACTIVE)
+    image = models.ImageField(upload_to='upload/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
 
 Modelo Order
 El modelo Order representa las órdenes de compra generadas por los usuarios dentro de la aplicación.
@@ -601,6 +708,43 @@ Finalmente el método:
 def __str__(self):
     return f"Orden #{self.id}"
 sirve para mostrar el número de la orden dentro del panel de administración de una manera más clara y organizada.
+# ORDER
+class Order(models.Model):
+    PENDING = 'pending'
+    PAID = 'paid'
+    SHIPPED = 'shipped'
+
+    STATUS_CHOICES = (
+        (PENDING, 'Pendiente'),
+        (PAID, 'Pagado'),
+        (SHIPPED, 'Enviado'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    full_name = models.CharField(max_length=255)
+    address = models.TextField()
+    city = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Orden #{self.id}"
+
+
+# ORDER ITEMS
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def subtotal(self):
+        return self.price * self.quantity
 
 
 
@@ -717,7 +861,9 @@ Gracias a este modelo es posible guardar el detalle completo de cada compra real
 
 
 
-Diagrama de flujo
+
+
+                             Diagrama de flujo
                            
                            INICIO
                               │
@@ -903,6 +1049,54 @@ Eliminar categorías obsoletas.
 Remover órdenes incorrectas.
 Antes de eliminar la información, Django solicita una confirmación para evitar pérdidas accidentales de datos.
 
+
+
+
+
+
+Groups
+Sirven para agrupar permisos.
+
+
+Users
+Aquí se guardan los usuarios del sistema.
+
+
+
+
+
+
+
+Artists 
+Guarda información de los artistas. 
+
+
+
+Cart Items
+Representa productos dentro del carrito de compras. 
+
+
+
+Categories 
+Sirven para clasificar álbumes.
+
+
+Comments 
+Comentarios de los usuarios 
+
+
+
+Posts
+Cada Post representa un disco o álbum. 
+
+
+
+Specifications
+Características adicionales de un álbum. 
+
+
+
+
 Ventajas del Sistema Admin de Django
 El panel administrativo proporciona:
 Gestión centralizada de la información.
@@ -957,12 +1151,14 @@ El template recibe la variable posts enviada por el view y muestra cada álbum e
 
 
 
+
 Explicación de cada View
 
 
 View home
 def home(request):
 Este view controla la página principal de la aplicación. Lo que hace es:
+
 obtener los álbumes activos,
 obtener las categorías,
 
@@ -977,7 +1173,9 @@ acceso al carrito.
 
 View category_detail
 def category_detail(request, slug):
-Este view muestra los álbumes de una categoría específica. El slug se recibe desde la URL: path('category/<slug:slug>/', category_detail)
+Este view muestra los álbumes de una categoría 
+
+específica. El slug se recibe desde la URL: path('category/<slug:slug>/', category_detail)
 Ejemplo:
 /category/rock/ El view:
 Busca la categoría.
@@ -989,6 +1187,8 @@ Envía los datos al template category_detail.html.
 View detail
 def detail(request, id):
 Este view muestra la información detallada de un álbum. La URL manda el id del álbum:
+
+
 path('detail/<int:id>/', detail) Ejemplo:
 /detail/2/ El view:
 obtiene el álbum,
@@ -1007,6 +1207,8 @@ botón de compra.
 
 View cart @login_required def cart(request):
 Este view muestra el carrito de compras. El decorador:
+
+
 @login_required
 sirve para que solamente usuarios registrados puedan entrar al carrito. El view:
 obtiene los productos agregados,
@@ -1018,6 +1220,7 @@ manda los datos al template cart.html.
 View add_to_cart
 def add_to_cart(request, id):
 Este view permite agregar productos al carrito. Proceso:
+
 Obtiene el álbum.
 Revisa si ya existe en el carrito.
 Si existe:
@@ -1029,7 +1232,9 @@ detail.html → add_to_cart → cart.html
 
 View register
 def register(request):
-Este view se encarga del registro de usuarios. Funciones principales:
+Este view se encarga del registro de usuarios. 
+
+Funciones principales:
 procesa el formulario,
 crea el usuario,
 crea el perfil,
@@ -1039,9 +1244,24 @@ register.html
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 View checkout
 def checkout(request):
-Este es uno de los views más importantes porque controla el proceso de compra. Aquí se conectan varias partes de la aplicación:
+Este es uno de los views más importantes porque controla el proceso de compra. 
+
+Aquí se conectan varias partes de la aplicación:
 carrito,
 formularios,
 órdenes,
@@ -1069,14 +1289,22 @@ success.html
 
 View success
 def success(request):
-Este view solamente muestra la pantalla de compra exitosa. Renderiza el template:
+Este view solamente muestra la pantalla de compra exitosa. 
+
+Renderiza el template:
 success.html
+
+
+
+
+
 
 
 
 View my_orders
 def my_orders(request):
 Este view muestra el historial de pedidos del usuario. Lo que hace es:
+
 obtener las órdenes del usuario,
 ordenarlas por fecha,
 enviarlas al template my_orders.html.
@@ -1104,6 +1332,47 @@ cerrar sesión.
 Y si no ha iniciado sesión aparecen:
 login,
 registro.
+
+
+IMPLEMENTACIÓN DE LA APLICACIÓN
+
+ 
+
+inicio de sesión para poder usar la pagina:
+
+
+Una vez registrado tienes una variedad de apartados de álbumes:
+
+   
+En caso de buscar un album o artista en especifico se usa la pestaña de búsqueda
+
+
+cada álbum tiene un apartado con su nombre precio canción y descripción:
+
+
+en este apartado se muestra la forma en que puedes comprar un álbum y la cantidad que tu quieres comprar: 
+
+
+
+
+
+
+
+
+
+ aqui se muestra la forma de pago junto con los requisitos que se necesitan para tu pedido:
+
+
+
+
+
+
+
+
+
+Aqui se lleva un registro de los pedidos que ya se han hecho
+
+
 Conclusión:
 En el ecosistema de Django, las views (vistas) se consolidan como el motor operativo y el núcleo de la lógica de negocio de la aplicación. Su importancia radica en su capacidad para actuar como el puente conector definitivo dentro de la arquitectura MVT (Model-View-Template); son las encargadas de interceptar las peticiones HTTP redirigidas por las URLs, procesar la información necesaria (interactuando con la base de datos si es requerido) y renderizar el resultado final a través de los templates para entregárselo al usuario de forma dinámica.
 Gracias a esta articulación armónica entre views, URLs y templates, la aplicación no solo es estática, sino que se transforma en una plataforma interactiva capaz de resolver flujos de trabajo complejos. En este proyecto en particular, esta sinergia ha permitido implementar con éxito funcionalidades críticas como:
@@ -1115,4 +1384,3 @@ En conclusión, el correcto diseño e implementación de las vistas garantiza un
 Aporta terminología técnica: Introduce conceptos clave como "arquitectura MVT", "lógica de negocio", "peticiones HTTP" y "separación de responsabilidades".
 Mejor flujo: Transforma la lista de viñetas en un argumento más sólido y enfocado al impacto que tiene en el negocio o la aplicación (E-commerce/Catálogo).
 Cierre redondo: Termina explicando el beneficio doble: para el programador (código limpio) y para el cliente (buena experiencia).
-
