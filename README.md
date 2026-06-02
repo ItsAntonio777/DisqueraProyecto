@@ -103,19 +103,6 @@ Conclusión:	34
 ¿Por qué funciona bien esta expansión?	34
 
 	
-
-
-<img width="813" height="505" alt="image" src="https://github.com/user-attachments/assets/80d49334-04f7-422c-b413-7b81b3e34c2b" />
-
-
-
-
-
-
-
-
-
-
 Introducción
 Descripción General del Proyecto
 
@@ -365,6 +352,8 @@ Después el comentario se relaciona con el álbum correspondiente y finalmente s
 
 
 Diseño de la Base de Datos y Relaciones
+<img width="823" height="520" alt="image" src="https://github.com/user-attachments/assets/25770fad-9a53-4bc6-8b32-03ea061eb88b" />
+
 
 
 La base de datos del proyecto “Disquera” fue desarrollada utilizando el ORM de Django, permitiendo manejar la información mediante modelos relacionados entre sí.
@@ -813,6 +802,7 @@ Modelo Profile
 
 El modelo Profile extiende la información básica del usuario.
 
+
 Campos
 
 phone
@@ -849,6 +839,7 @@ Modelo OrderItem
 
 Este modelo almacena los productos individuales comprados dentro de una orden.
 
+<img width="274" height="491" alt="image" src="https://github.com/user-attachments/assets/b4ad1a01-8ff8-4315-92d5-e04d5941132d" />
 
 Campos
 
@@ -1057,43 +1048,52 @@ Antes de eliminar la información, Django solicita una confirmación para evitar
 
 Groups
 Sirven para agrupar permisos.
+<img width="679" height="298" alt="image" src="https://github.com/user-attachments/assets/f15dc10c-0c51-490c-a30e-c872537736cb" />
 
 
 Users
 Aquí se guardan los usuarios del sistema.
-
-
-
-
-
+<img width="679" height="369" alt="image" src="https://github.com/user-attachments/assets/a3f190a2-f970-47a9-87e6-ae208d448852" />
 
 
 Artists 
 Guarda información de los artistas. 
+<img width="677" height="374" alt="image" src="https://github.com/user-attachments/assets/b0f4fe94-c64b-4cec-a431-f6fe866c1a37" />
+
 
 
 
 Cart Items
 Representa productos dentro del carrito de compras. 
+<img width="681" height="353" alt="image" src="https://github.com/user-attachments/assets/f1750312-8b42-4aed-bad9-6af8e4ef219f" />
+
 
 
 
 Categories 
 Sirven para clasificar álbumes.
+<img width="672" height="346" alt="image" src="https://github.com/user-attachments/assets/3ae01e2c-a145-4da5-9118-32171ce5acd4" />
+
 
 
 Comments 
 Comentarios de los usuarios 
+<img width="680" height="391" alt="image" src="https://github.com/user-attachments/assets/a26afb37-b1d4-4198-b174-ff0315b506d0" />
+
 
 
 
 Posts
 Cada Post representa un disco o álbum. 
+<img width="682" height="376" alt="image" src="https://github.com/user-attachments/assets/72e80f90-46cd-4697-8b14-255552d5490b" />
+
 
 
 
 Specifications
 Características adicionales de un álbum. 
+<img width="684" height="343" alt="image" src="https://github.com/user-attachments/assets/314e8337-a07e-4b8c-b5d6-cf594d9637bf" />
+
 
 
 
