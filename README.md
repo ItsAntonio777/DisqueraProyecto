@@ -105,6 +105,7 @@ Conclusión:	34
 	
 
 
+<img width="813" height="505" alt="image" src="https://github.com/user-attachments/assets/80d49334-04f7-422c-b413-7b81b3e34c2b" />
 
 
 
