@@ -150,6 +150,8 @@ el archivo admin.py de la aplicación disquera dentro de Django. Este archivo si
 Primero se importa el módulo de administración de Django:
 from django.contrib import admin
 Después se importan los modelos creados en models.py:
+```python
+
 from .models import (
     Category,
     Artist,
@@ -158,21 +160,39 @@ from .models import (
     Comment,
     CartItem
 )
+```
+
 Estos modelos representan las tablas principales de la base de datos del proyecto, por ejemplo:
+
 Category almacena las categorías musicales.
+
 Artist almacena los artistas.
+
 Post representa los álbumes.
+
 Comment guarda comentarios.
+
 CartItem controla el carrito de compras.
+
 Finalmente cada modelo se registra usando:
+```python
+
 admin.site.register(Category)
+```
 El método admin.site.register() le indica a Django que ese modelo debe aparecer dentro del panel de administración.
+
 Gracias a esto el administrador puede realizar operaciones CRUD directamente desde /admin, es decir:
+
 Crear registros.
+
 Visualizar información.
+
 Modificar datos.
+
 Eliminar registros.
+
 Por ejemplo, al registrar el modelo Post, el administrador puede subir nuevos álbumes musicales, cambiar precios o eliminar publicaciones directamente desde el panel de Django sin necesidad de modificar el código manualmente.
+
 Este archivo es muy importante porque conecta los modelos de la base de datos con la interfaz administrativa del sistema.
 
 Gestión de Usuarios y Artistas
@@ -189,8 +209,11 @@ El proyecto incluye un sistema completo de carrito de compras y pedidos.
 El modelo CartItem almacena temporalmente los productos que el usuario desea comprar, junto con la cantidad seleccionada. Después, durante el proceso de checkout, se genera una orden mediante el modelo Order, donde se guarda:
 
 información del cliente,
+
 dirección de envío,
+
 total de compra,
+
 estado del pedido.
 
 De esta manera la aplicación puede llevar un historial de compras realizadas por cada usuario.
@@ -206,9 +229,13 @@ Uno de los conceptos más importantes utilizados fue la herencia de plantillas, 
 Plantilla Base (base.html)
 
 El archivo base.html funciona como la estructura principal del proyecto. Aquí se encuentran elementos globales como:
+
 la navbar,
+
 Bootstrap,
+
 estructura HTML general,
+
 estilos compartidos.
 
 Los demás templates heredan esta estructura usando:
@@ -223,8 +250,11 @@ Página Principal (home.html)
 Aquí se muestran:
 
 los álbumes disponibles,
+
 categorías musicales,
+
 botones de navegación,
+
 acceso rápido al carrito.
 
 Los productos se presentan mediante cards de Bootstrap para lograr una interfaz más limpia y visualmente agradable.
@@ -240,11 +270,17 @@ Los productos se presentan mediante cards de Bootstrap para lograr una interfaz 
 Vistas de Detalle y Categorías
 
 Las páginas detail.html y category_detail.html permiten que el usuario consulte información más específica. En estas vistas se muestran:
+
 imágenes de los álbumes,
+
 descripción,
+
 canciones,
+
 precio,
+
 stock disponible,
+
 botones de compra.
 
 Bootstrap ayuda a organizar el contenido mediante filas y columnas responsivas para que la información se vea ordenada tanto en computadora como en dispositivos móviles.
@@ -253,9 +289,13 @@ Bootstrap ayuda a organizar el contenido mediante filas y columnas responsivas p
 Checkout y Proceso de Compra
 
 La página checkout.html se enfoca en finalizar la compra de manera sencilla. Aquí el usuario puede ingresar:
+
 nombre,
+
 dirección,
+
 ciudad,
+
 código postal.
 
 También se muestra un resumen del pedido con el total a pagar.
@@ -263,7 +303,10 @@ Una vez confirmada la compra, la aplicación registra la orden y redirecciona a 
 
 
 Relaciones:
-Order (1) → (N) OrderItem Post (1) → (N) OrderItem
+Order (1) → (N) 
+OrderItem Post (1) → 
+(N) OrderItem
+
 La función subtotal() calcula el costo individual de cada producto dentro de la orden.
 
 Explicación Detallada de settings.py (La Configuración del Sistema)
@@ -275,10 +318,13 @@ Rutas del Sistema y Seguridad
 
 BASE_DIR:
 Utiliza la librería pathlib para detectar automáticamente la carpeta donde se encuentra el proyecto. Esto ayuda a que el código funcione en distintos sistemas operativos sin tener que escribir rutas manualmente.
+
 SECRET_KEY:
 Es una clave única utilizada por Django para temas de seguridad y protección interna del sistema.
+
 DEBUG = True:
 Esta opción se encuentra activada durante el desarrollo del proyecto. Gracias a esto Django muestra información detallada de los errores cuando algo falla en el código. Aunque es muy útil mientras se programa, cuando la aplicación se sube a internet debe cambiarse a False por seguridad.
+
 ALLOWED_HOSTS = []:
 Al estar vacío y usar DEBUG = True la aplicación funciona correctamente en el entorno local si el proyecto se publicara en internet aquí se tendría que colocar el dominio del sitio web.
 
@@ -302,27 +348,34 @@ Base de Datos y Multimedia
 
 DATABASES:
 El proyecto utiliza sqlite3, que es la base de datos predeterminada de Django. Esta se guarda en un archivo llamado db.sqlite3 y resulta muy práctica para proyectos escolares o en desarrollo porque es ligera y fácil de configurar.
+
 MEDIA_URL y MEDIA_ROOT:
 Estas configuraciones permiten guardar y mostrar archivos multimedia como las imágenes de los álbumes musicales. Gracias a esto las portadas pueden visualizarse correctamente dentro de la aplicación.
 
 Explicación Detallada de urls.py (El Enrutador Global)
 
 El archivo urls.py principal funciona como la puerta de entrada de toda la aplicación. Su función es recibir las solicitudes del navegador y dirigirlas hacia las vistas correspondientes.
+```python
 
 urlpatterns = [
 path('admin/', admin.site.urls), path('', include('disquera.urls')),
 ]
+```
 Función de cada ruta
 
 path('admin/', admin.site.urls):
 Conecta el panel de administración de Django. Desde esta sección el administrador puede gestionar categorías, álbumes, usuarios y demás registros del sistema sin necesidad de crear interfaces adicionales.
+
 path('', include('disquera.urls')):
 Este fragmento le indica a Django que todas las rutas principales de la tienda estarán organizadas dentro del archivo urls.py de la aplicación disquera. Esto ayuda a mantener el proyecto más ordenado y modular.
 
 
 Bloque Condicional para Archivos Multimedia
 if settings.DEBUG:
+```python
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
 
 Este bloque sirve para que Django pueda mostrar imágenes y archivos multimedia mientras el proyecto se encuentra en modo desarrollo. Gracias a esto las portadas de los álbumes se visualizan correctamente en la interfaz.
 
@@ -336,16 +389,22 @@ El archivo views.py contiene la lógica principal de varias funciones de la apli
 View home(request)
 
 Esta vista controla la página principal del sistema. Su función principal es:
+
 consultar los álbumes activos desde la base de datos,
+
 enviarlos al template home.html,
+
 mostrar el catálogo musical al usuario.
+
 
 La vista obtiene la información usando el modelo Post y posteriormente la manda al template mediante variables de contexto.
 
 View detail(request, id)
 
 Esta vista muestra la información detallada de un álbum específico y además controla el sistema de comentarios. El funcionamiento cambia dependiendo del método utilizado:
+
 Si el usuario solamente entra a visualizar el álbum, Django utiliza el método GET y simplemente muestra la página junto con un formulario vacío.
+
 Si el usuario envía un comentario, el método cambia a POST. Entonces la vista procesa la información recibida mediante CommentForm(request.POST) y valida que los datos sean correctos usando form.is_valid().
 
 Después el comentario se relaciona con el álbum correspondiente y finalmente se guarda en la base de datos. Esto permite que los usuarios puedan interactuar con las publicaciones de manera dinámica.
@@ -407,47 +466,85 @@ Modelo Post
 
 El modelo Post representa los álbumes musicales dentro de la tienda.El modelo Profile fue creado para extender la información del usuario autenticado de Django. Aunque Django ya incluye un modelo User, este solamente almacena datos básicos como nombre de usuario, correo y contraseña. Por esa razón se implementó un perfil personalizado para guardar información adicional relacionada con cada usuario.
 class Profile(models.Model):
+
 Dentro del modelo se utilizan distintos campos para almacenar información específica del usuario:
+
 image: permite guardar una imagen de perfil.
+
 bio: almacena una pequeña biografía o descripción.
+
 phone: guarda el número telefónico.
+
 address: almacena la dirección.
+
 city: guarda la ciudad.
+
 postal_code: almacena el código postal.
+
 La relación más importante es:
+
+```python
 user = models.OneToOneField(User, on_delete=models.CASCADE)
+```
+
 Esta línea crea una relación uno a uno entre el modelo Profile y el modelo User de Django, lo que significa que cada usuario tendrá un único perfil asociado.
 Además se utiliza:
+
 on_delete=models.CASCADE
+
 Esto indica que si un usuario es eliminado, automáticamente también se eliminará su perfil relacionado, manteniendo la integridad de la base de datos.
+
 Finalmente el método:
+```python
+
 def __str__(self):
     return self.user.username
+```
 sirve para mostrar el nombre del usuario dentro del panel de administración de Django, facilitando la identificación de cada perfil registrado.
 
 
 Modelo Category
 El modelo Category representa las categorías musicales dentro de la aplicación.
 class Category(models.Model):
-Este modelo permite clasificar los álbumes según su género musical, por ejemplo:
+
+Este modelo permite clasificar los álbumes según 
+su género musical, por ejemplo:
+
 Rock,
+
 Pop,
+
 Reggaetón,
+
 Electrónica.
+
 Los campos principales son:
+
 title: almacena el nombre de la categoría.
+
 slug: genera URLs amigables y más organizadas.
+
 color_hex: almacena un color hexadecimal utilizado para personalizar visualmente las categorías.
+
 El campo slug es importante porque ayuda a construir rutas más fáciles de leer dentro de la aplicación. Por ejemplo:
+
 /category/rock/
+
 En lugar de utilizar identificadores numéricos más difíciles de interpretar.
+
 El campo:
+```python
+
 color_hex = models.CharField(max_length=7, default='#FFB03A')
+```
+
 permite asignar un color personalizado a cada categoría usando códigos hexadecimales, mejorando la apariencia visual de la interfaz.
 Por último el método:
 def __str__(self):
     return self.title
+
 permite que Django muestre el nombre de la categoría dentro del panel de administración en lugar de mostrar objetos genéricos.
+```python
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -478,39 +575,62 @@ class Category(models.Model):
         return self.title
 
 
+
 Modelo Artist
+
 El modelo Artist fue creado para almacenar la información relacionada con los artistas musicales dentro de la plataforma.
+
 class Artist(models.Model):
-Este modelo permite separar la información de los artistas del resto de usuarios del sistema, manteniendo una mejor organización dentro de la base de datos.
+```
+
+Este modelo permite separar la información de los artistas del resto de usuarios del sistema, manteniendo una mejor organización dentro de la 
+base de datos.
+
 La relación principal del modelo es:
+
 user = models.OneToOneField(User, on_delete=models.CASCADE)
+
 Esta línea crea una relación uno a uno con el modelo User de Django, lo que significa que cada artista tendrá un único usuario asociado para poder iniciar sesión dentro de la plataforma.
 El parámetro:
+
 on_delete=models.CASCADE
+
 indica que si el usuario es eliminado también se eliminará automáticamente el artista relacionado, evitando registros huérfanos dentro de la base de datos.
+
 Los campos principales del modelo son:
 stage_name: almacena el nombre artístico.
 bio: guarda una biografía o descripción del artista.
+
 Finalmente el método:
 def __str__(self):
     return self.stage_name
 permite mostrar el nombre artístico dentro del panel de administración de Django de una manera más clara y entendible.
 Modelo Post
+
 El modelo Post representa los álbumes o productos musicales disponibles dentro de la aplicación.
+
 class Post(models.Model):
-Este es uno de los modelos más importantes del proyecto porque almacena la información principal que se muestra en la tienda.
+Este es uno de los modelos más importantes del proyecto porque almacena la información principal 
+que se muestra en la tienda.
+
 Dentro del modelo se definen distintos estados para las publicaciones:
 ACTIVE = 'active'
 DRAFT = 'draft'
 active: el álbum se encuentra visible para los usuarios.
 draft: el álbum permanece oculto mientras se edita o prepara.
 Después se crean las opciones disponibles:
+```python
+
 CHOICES_STATUS = (
     (ACTIVE, 'Active'),
     (DRAFT, 'Draft'),
 )
+```
+
 Esto permite controlar el estado de las publicaciones desde el panel de administración.
 El modelo Post se relaciona con Artist mediante:
+```python
+
 artist = models.ForeignKey(
     Artist,
     related_name='posts',
@@ -518,6 +638,8 @@ artist = models.ForeignKey(
     null=True,
     blank=True
 )
+
+```
 Esta relación significa que un artista puede tener muchos álbumes publicados, pero cada álbum pertenece únicamente a un artista.
 El parámetro related_name='posts' permite acceder fácilmente a todos los álbumes de un artista.
 Mientras que:
@@ -530,6 +652,8 @@ El modelo Post funciona como el núcleo principal de la tienda ya que conecta ar
 
 
 #  ARTIST
+```python
+
 class Artist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     stage_name = models.CharField(max_length=255)
@@ -538,8 +662,11 @@ class Artist(models.Model):
     def __str__(self):
         return self.stage_name
 
+```
 
 # POST (ÁLBUM / PRODUCTO)
+```python
+
 class Post(models.Model):
     ACTIVE = 'active'
     DRAFT = 'draft'
@@ -556,19 +683,26 @@ class Post(models.Model):
         null=True,
         blank=True
     )
+```
+```python
+
 Dentro del modelo Post se encuentran varios campos encargados de almacenar toda la información relacionada con los álbumes musicales de la tienda.
 El campo:
+
 title = models.CharField(max_length=255)
 guarda el título del álbum o publicación.
 Después se utiliza:
+
 slug = models.SlugField(max_length=255)
 Este campo sirve para generar URLs amigables y más fáciles de leer dentro de la aplicación.
 Por ejemplo:
 /detail/album-rock/
 En lugar de usar rutas complicadas o números largos.
 Los campos:
+
 intro = models.TextField()
 body = models.TextField()
+
 almacenan la descripción corta y la información completa del álbum.
 También aparece:
 songs = models.TextField(blank=True, null=True)
@@ -629,8 +763,10 @@ El campo:
 created_at = models.DateTimeField(auto_now_add=True)
 permite guardar automáticamente la fecha y hora del comentario sin necesidad de ingresarla manualmente.
 Gracias a este modelo la aplicación puede mostrar comentarios dinámicamente dentro de la vista detallada de cada álbum.
-
+```
    # ManyToManyField
+   ```python
+
     categories = models.ManyToManyField(
         Category,
         related_name='posts',
@@ -653,26 +789,33 @@ Gracias a este modelo la aplicación puede mostrar comentarios dinámicamente de
 
     def __str__(self):
         return self.title
+```
+```python
 
 
 
 Modelo Order
 El modelo Order representa las órdenes de compra generadas por los usuarios dentro de la aplicación.
 class Order(models.Model):
+```
 Este modelo es importante porque almacena toda la información relacionada con las compras realizadas en la tienda.
 Primero se definen distintos estados para las órdenes:
+
 PENDING = 'pending'
 PAID = 'paid'
 SHIPPED = 'shipped'
+
 Estos estados permiten controlar el progreso de cada pedido:
 pending: la orden aún no ha sido pagada.
 paid: la compra fue completada correctamente.
 shipped: el pedido ya fue enviado.
 Después se crean las opciones disponibles:
-STATUS_CHOICES = (
+STATUS_CHOICES = 
 Esto ayuda a que Django muestre una lista seleccionable dentro del panel de administración, facilitando el control de estados de las órdenes.
 La relación principal del modelo es:
+
 user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 Esto significa que un usuario puede tener muchas órdenes registradas dentro del sistema.
 Por ejemplo:
 User (1) → (N) Order
@@ -699,6 +842,8 @@ def __str__(self):
     return f"Orden #{self.id}"
 sirve para mostrar el número de la orden dentro del panel de administración de una manera más clara y organizada.
 # ORDER
+```python
+
 class Order(models.Model):
     PENDING = 'pending'
     PAID = 'paid'
@@ -724,9 +869,12 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Orden #{self.id}"
+```
 
 
 # ORDER ITEMS
+```python
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -736,7 +884,7 @@ class OrderItem(models.Model):
     def subtotal(self):
          return self.price * self.quantity
 
-
+```
 
 Campos principales
 
@@ -1128,6 +1276,8 @@ realizar acciones,
 enviar datos a los templates.
 
 Ejemplo:
+```python
+
 def home(request):
 
 
@@ -1141,6 +1291,7 @@ categories = Category.objects.all()
 return render(request, 'disquera/home.html', { 'posts': posts,
 'categories': categories
 })
+```
 Aquí el view obtiene los álbumes y categorías para después enviarlos al template home.html.
 
 
