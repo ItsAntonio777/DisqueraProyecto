@@ -874,16 +874,17 @@ Gracias a este modelo es posible guardar el detalle completo de cada compra real
         ┌─────────────────────────────────────┐
         │                                     │
         ▼                                     ▼
-  home(request)                        detail(request,id)
+  
+    home(request)                        detail(request,id)
+        │                                     │
+         ▼                                     ▼
+    Obtiene álbumes                       Obtiene álbum
+    y categorías                          y comentarios
+    desde Post y Category                 desde Post y Comment
         │                                     │
         ▼                                     ▼
- Obtiene álbumes                       Obtiene álbum
- y categorías                          y comentarios
- desde Post y Category                 desde Post y Comment
-        │                                     │
-        ▼                                     ▼
- Envía datos a                         Envía datos a
- home.html                             detail.html
+    Envía datos a                         Envía datos a
+    home.html                             detail.html
         │                                     │
         └─────────────────────────────────────┘
                               │
@@ -920,8 +921,8 @@ Gracias a este modelo es posible guardar el detalle completo de cada compra real
           ┌────────────────────────────────┐
           │                                │
           ▼                                ▼
-   Obtiene productos                 Procesa formulario
-   desde CartItem                    de compra
+     Obtiene productos                 Procesa formulario
+     desde CartItem                    de compra
           │                                │
           └────────────────────────────────┘
                               │
