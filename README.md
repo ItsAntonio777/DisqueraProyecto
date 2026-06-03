@@ -1149,6 +1149,8 @@ Templates
 Los templates son los archivos HTML que muestran la parte visual de la aplicación. Por ejemplo:
 {% for post in posts %}
 El template recibe la variable posts enviada por el view y muestra cada álbum en pantalla.
+<img width="655" height="371" alt="image" src="https://github.com/user-attachments/assets/7bc3fdd0-e136-4d93-97a1-b3ff4f1030d8" />
+
 
 
 
@@ -1158,7 +1160,10 @@ Explicación de cada View
 
 View home
 def home(request):
-Este view controla la página principal de la aplicación. Lo que hace es:
+Este view controla la página principal de la aplicación.
+Lo que hace es:
+<img width="669" height="350" alt="image" src="https://github.com/user-attachments/assets/191f1bbf-bbd0-48ff-b0c4-76c511f835d8" />
+
 
 obtener los álbumes activos,
 obtener las categorías,
@@ -1175,6 +1180,7 @@ acceso al carrito.
 View category_detail
 def category_detail(request, slug):
 Este view muestra los álbumes de una categoría 
+<img width="624" height="344" alt="image" src="https://github.com/user-attachments/assets/73492b10-4b21-4926-b56e-9b12e86b5e8a" />
 
 específica. El slug se recibe desde la URL: path('category/<slug:slug>/', category_detail)
 Ejemplo:
@@ -1187,7 +1193,9 @@ Envía los datos al template category_detail.html.
 
 View detail
 def detail(request, id):
-Este view muestra la información detallada de un álbum. La URL manda el id del álbum:
+Este view muestra la información detallada de un álbum. 
+La URL manda el id del álbum:
+<img width="655" height="336" alt="image" src="https://github.com/user-attachments/assets/019290a1-d818-490a-a34c-d050203b5b62" />
 
 
 path('detail/<int:id>/', detail) Ejemplo:
@@ -1207,7 +1215,9 @@ botón de compra.
 
 
 View cart @login_required def cart(request):
-Este view muestra el carrito de compras. El decorador:
+Este view muestra el carrito de compras. 
+El decorador:
+<img width="682" height="348" alt="image" src="https://github.com/user-attachments/assets/a93bc371-d6a2-4491-8ce8-fcb4ca215e3b" />
 
 
 @login_required
@@ -1221,6 +1231,8 @@ manda los datos al template cart.html.
 View add_to_cart
 def add_to_cart(request, id):
 Este view permite agregar productos al carrito. Proceso:
+<img width="629" height="330" alt="image" src="https://github.com/user-attachments/assets/daaf41bc-0287-44a2-b6de-f9f4ac8bdf37" />
+
 
 Obtiene el álbum.
 Revisa si ya existe en el carrito.
@@ -1234,6 +1246,8 @@ detail.html → add_to_cart → cart.html
 View register
 def register(request):
 Este view se encarga del registro de usuarios. 
+<img width="674" height="346" alt="image" src="https://github.com/user-attachments/assets/40b86c71-9ff2-47af-aa9b-af407977bedb" />
+
 
 Funciones principales:
 procesa el formulario,
@@ -1243,24 +1257,10 @@ inicia sesión automáticamente,
 redirecciona al inicio. Usa el template:
 register.html
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 View checkout
 def checkout(request):
 Este es uno de los views más importantes porque controla el proceso de compra. 
+<img width="683" height="343" alt="image" src="https://github.com/user-attachments/assets/06000417-e1ca-4032-8f4a-b27c5536d36a" />
 
 Aquí se conectan varias partes de la aplicación:
 carrito,
@@ -1291,20 +1291,18 @@ success.html
 View success
 def success(request):
 Este view solamente muestra la pantalla de compra exitosa. 
+<img width="679" height="327" alt="image" src="https://github.com/user-attachments/assets/e79f257d-f4f8-4cca-b152-004e29810569" />
+
 
 Renderiza el template:
 success.html
 
 
-
-
-
-
-
-
 View my_orders
 def my_orders(request):
-Este view muestra el historial de pedidos del usuario. Lo que hace es:
+Este view muestra el historial de pedidos del usuario. 
+Lo que hace es:
+<img width="677" height="367" alt="image" src="https://github.com/user-attachments/assets/d7c38ad6-999c-4377-aa6b-3650b0fcceda" />
 
 obtener las órdenes del usuario,
 ordenarlas por fecha,
@@ -1337,41 +1335,38 @@ registro.
 
 IMPLEMENTACIÓN DE LA APLICACIÓN
 
- 
+ inicio de sesión para poder usar la pagina:
+<img width="678" height="369" alt="image" src="https://github.com/user-attachments/assets/6d3da629-7bc7-4a85-b62d-6c386d4c9125" />
 
-inicio de sesión para poder usar la pagina:
+<img width="686" height="351" alt="image" src="https://github.com/user-attachments/assets/e6d2b9a9-1320-4566-9d85-e1153c0bbbed" />
 
 
 Una vez registrado tienes una variedad de apartados de álbumes:
+<img width="647" height="344" alt="image" src="https://github.com/user-attachments/assets/bbb46975-f9f9-4b88-9add-c9440e180c08" />
+
+<img width="631" height="349" alt="image" src="https://github.com/user-attachments/assets/c98b15f5-2382-4f66-9a19-ae5641442034" />
 
    
 En caso de buscar un album o artista en especifico se usa la pestaña de búsqueda
-
+<img width="680" height="388" alt="image" src="https://github.com/user-attachments/assets/6e7ef304-6051-41e1-82b4-ea9b5f660310" />
+<img width="672" height="371" alt="image" src="https://github.com/user-attachments/assets/a156f2da-136b-4ad2-b258-f1c2e92414f6" />
 
 cada álbum tiene un apartado con su nombre precio canción y descripción:
+<img width="416" height="496" alt="image" src="https://github.com/user-attachments/assets/160abbcc-0796-4753-a3ed-58c382ac601e" />
+
 
 
 en este apartado se muestra la forma en que puedes comprar un álbum y la cantidad que tu quieres comprar: 
+<img width="732" height="314" alt="image" src="https://github.com/user-attachments/assets/c35823a1-9cc5-4bcc-8eb9-3ff1119e448a" />
 
-
-
-
-
-
-
-
-
- aqui se muestra la forma de pago junto con los requisitos que se necesitan para tu pedido:
-
-
-
-
-
-
-
+aqui se muestra la forma de pago junto con los requisitos que se necesitan para tu pedido:
+<img width="721" height="375" alt="image" src="https://github.com/user-attachments/assets/3ae81e32-0e0f-4208-a6ed-bd9bbbab8a67" />
+<img width="721" height="368" alt="image" src="https://github.com/user-attachments/assets/02beaa55-f9ad-4bda-b948-4241849b9e37" />
 
 
 Aqui se lleva un registro de los pedidos que ya se han hecho
+<img width="723" height="426" alt="image" src="https://github.com/user-attachments/assets/2d04bae8-b6ea-4e9c-8e06-7bb4abd5b799" />
+
 
 
 Conclusión:
