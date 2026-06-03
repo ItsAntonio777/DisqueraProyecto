@@ -551,6 +551,8 @@ from django.contrib.auth.models import User
 
 
 # PROFILE
+```python
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='profiles/', blank=True, null=True)
@@ -564,8 +566,10 @@ class Profile(models.Model):
     def __str__(self):
        return self.user.username
 
-
+```
 #  CATEGORY
+```python
+
 class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
@@ -573,28 +577,31 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
-
+```
 
 
 Modelo Artist
 
 El modelo Artist fue creado para almacenar la información relacionada con los artistas musicales dentro de la plataforma.
+```python
 
 class Artist(models.Model):
 ```
-
 Este modelo permite separar la información de los artistas del resto de usuarios del sistema, manteniendo una mejor organización dentro de la 
 base de datos.
 
 La relación principal del modelo es:
+```python
+
 
 user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+```
 Esta línea crea una relación uno a uno con el modelo User de Django, lo que significa que cada artista tendrá un único usuario asociado para poder iniciar sesión dentro de la plataforma.
 El parámetro:
+```python
 
 on_delete=models.CASCADE
-
+```
 indica que si el usuario es eliminado también se eliminará automáticamente el artista relacionado, evitando registros huérfanos dentro de la base de datos.
 
 Los campos principales del modelo son:
@@ -602,8 +609,11 @@ stage_name: almacena el nombre artístico.
 bio: guarda una biografía o descripción del artista.
 
 Finalmente el método:
+```python
+
 def __str__(self):
     return self.stage_name
+```
 permite mostrar el nombre artístico dentro del panel de administración de Django de una manera más clara y entendible.
 Modelo Post
 
@@ -684,86 +694,134 @@ class Post(models.Model):
         blank=True
     )
 ```
-```python
 
 Dentro del modelo Post se encuentran varios campos encargados de almacenar toda la información relacionada con los álbumes musicales de la tienda.
 El campo:
+```python
 
 title = models.CharField(max_length=255)
+```
 guarda el título del álbum o publicación.
 Después se utiliza:
+```python
 
 slug = models.SlugField(max_length=255)
+```
 Este campo sirve para generar URLs amigables y más fáciles de leer dentro de la aplicación.
 Por ejemplo:
+
 /detail/album-rock/
+
 En lugar de usar rutas complicadas o números largos.
 Los campos:
-
+```python
 intro = models.TextField()
 body = models.TextField()
-
+```
 almacenan la descripción corta y la información completa del álbum.
 También aparece:
+```python
 songs = models.TextField(blank=True, null=True)
+```
 el cual permite guardar la lista de canciones del álbum.
+
 Los parámetros blank=True y null=True indican que este campo puede quedar vacío si todavía no se agregan canciones.
 Para la parte comercial se utilizan:
+```python
+
 price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+```
 Este campo almacena el precio del álbum utilizando valores decimales para mantener mayor precisión en operaciones monetarias.
 Mientras que:
+```python
+
 stock = models.PositiveIntegerField(default=1)
+```
 permite controlar la cantidad de productos disponibles en inventario evitando números negativos.
 El campo:
+```python
+
 created_at = models.DateTimeField(auto_now_add=True)
+```
 guarda automáticamente la fecha y hora en que el álbum fue creado dentro del sistema.
 También se utiliza:
+```python
+
 status = models.CharField(...)
+```
 para controlar si una publicación está activa o en borrador.
 Finalmente:
+```python
+
 image = models.ImageField(upload_to='upload/', blank=True, null=True)
+```
 permite subir imágenes de las portadas de los álbumes y almacenarlas dentro de la carpeta configurada para archivos multimedia.
 El método:
+```python
+
 def __str__(self):
     return self.title
+```
 hace que Django muestre el nombre del álbum dentro del panel de administración en lugar de mostrar objetos genéricos.
 Modelo Specification
 El modelo Specification fue creado para agregar características adicionales a cada álbum sin modificar directamente el modelo principal Post.
 class Specification(models.Model):
+
 Este modelo permite almacenar información flexible como:
+
 año de lanzamiento,
 formato musical,
 duración,
 sello discográfico.
+
 La relación principal es:
+```python
+
 post = models.ForeignKey(Post, related_name='specs', on_delete=models.CASCADE)
+```
 Esto significa que un álbum puede tener varias especificaciones relacionadas.
 Por ejemplo:
+
 Post (1) → (N) Specification
+
 Los campos:
+```python
+
 label = models.CharField(max_length=50)
 value = models.CharField(max_length=255)
+```
 permiten guardar tanto el nombre de la especificación como su valor correspondiente.
 Finalmente el método:
+```python
+
 def __str__(self):
+```
 sirve para mostrar las especificaciones de forma más organizada dentro del panel de administración.
 Modelo Comment
 El modelo Comment permite almacenar comentarios realizados por los usuarios sobre los álbumes musicales.
 class Comment(models.Model):
+
 Este modelo ayuda a que los usuarios puedan interactuar con las publicaciones dejando opiniones o reseñas.
 La relación principal es:
+```python
+
 post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+```
 Esto indica que un álbum puede tener muchos comentarios asociados.
 Los campos principales son:
+
 name: nombre de la persona que comenta.
 email: correo electrónico.
 body: contenido del comentario.
 created_at: fecha en la que se realizó el comentario.
 El campo:
+```python
+
 created_at = models.DateTimeField(auto_now_add=True)
+```
 permite guardar automáticamente la fecha y hora del comentario sin necesidad de ingresarla manualmente.
 Gracias a este modelo la aplicación puede mostrar comentarios dinámicamente dentro de la vista detallada de cada álbum.
-```
+
    # ManyToManyField
    ```python
 
